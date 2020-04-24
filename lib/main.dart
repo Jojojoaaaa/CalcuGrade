@@ -9,6 +9,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CalcuGrade',
+      theme: ThemeData(
+        // Define the default brightness and colors.
+        primaryColor: Colors.orange[800],
+        buttonColor: Colors.orange[800],
+
+        // Define the default font family.
+        fontFamily: 'Roboto',
+      ),
       home: Home(),
     );
   }
