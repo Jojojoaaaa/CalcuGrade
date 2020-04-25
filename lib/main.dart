@@ -16,6 +16,10 @@ class MyApp extends StatelessWidget {
 
         // Define the default font family.
         fontFamily: 'Roboto',
+
+        textTheme: TextTheme(
+          headline5: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       home: Home(),
     );

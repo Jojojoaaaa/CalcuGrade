@@ -1,48 +1,44 @@
 import 'package:flutter/material.dart';
 
 import 'package:calcugrade/widgets/buttons/route_buttons.dart';
+import 'package:calcugrade/screens/home/local_widgets/parent_text.dart';
 import 'package:calcugrade/screens/students/students.dart';
 
 class Home extends StatelessWidget {
+  final String headline = "Hi there!\n";
+  final String subheader = "Welcome to ";
+  final String highlight = "CALCUGRADE\n";
+  final String subheader2 = "Let's get work done!";
+  final TextStyle highlightStyle =
+      TextStyle(fontWeight: FontWeight.bold, color: Colors.orange[800]);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
+          child: Padding(
+        padding: EdgeInsets.all(40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              textDirection: TextDirection.ltr,
+            ParentText(
+              text: headline,
+              style: Theme.of(context).textTheme.headline5,
               children: [
-                Text(
-                  "Hi there!",
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                Text.rich(
-                  TextSpan(
-                    text: 'Welcome to ',
-                    style: Theme.of(context).textTheme.subtitle1,
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: 'CALCUGRADE',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.orange[800])),
-                    ],
-                  ),
-                ),
-                Text(
-                  "Let's get work done!",
-                  style: Theme.of(context).textTheme.subtitle1,
-                )
+                ParentText.getTextSpan(
+                    subheader,
+                    Theme.of(context).textTheme.subtitle1,
+                    [ParentText.getTextSpan(highlight, highlightStyle, [])]),
+                ParentText.getTextSpan(
+                    subheader2, Theme.of(context).textTheme.subtitle1, [])
               ],
             ),
             Image(image: AssetImage('assets/home/calcugrade.png')),
-            RouteButton(lable: "CONTINUE", screen: Students()),
+            SizedBox(
+                width: double.infinity,
+                child: RouteButton(lable: "CONTINUE", screen: Students())),
           ],
         ),
-      ),
+      )),
     );
   }
 }
