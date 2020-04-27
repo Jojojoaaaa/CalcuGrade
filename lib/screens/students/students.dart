@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:calcugrade/screens/grades/grades_settings/settings.dart';
 import 'package:calcugrade/screens/students/local_widgets/student_tile.dart';
 import 'package:calcugrade/screens/students/students_add/add.dart';
 import 'package:calcugrade/screens/students/students_class/student.dart';
@@ -12,7 +13,12 @@ class Students extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.settings),
             iconSize: 35,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },
           )
         ]),
         body: ListView(

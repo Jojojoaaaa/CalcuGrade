@@ -9,8 +9,7 @@ class Home extends StatelessWidget {
   final String subheader = "Welcome to ";
   final String highlight = "CALCUGRADE\n";
   final String subheader2 = "Let's get work done!";
-  final TextStyle highlightStyle =
-      TextStyle(fontWeight: FontWeight.bold, color: Colors.orange[800]);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,14 +21,14 @@ class Home extends StatelessWidget {
           children: <Widget>[
             ParentText(
               text: headline,
-              style: Theme.of(context).textTheme.headline5,
+              context: context,
               children: [
                 ParentText.getTextSpan(
                     subheader,
-                    Theme.of(context).textTheme.subtitle1,
-                    [ParentText.getTextSpan(highlight, highlightStyle, [])]),
+                    context,
+                    [ParentText.getTextSpan(highlight, context, [])]),
                 ParentText.getTextSpan(
-                    subheader2, Theme.of(context).textTheme.subtitle1, [])
+                    subheader2, context, [])
               ],
             ),
             Image(image: AssetImage('assets/home/calcugrade.png')),
