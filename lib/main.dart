@@ -11,14 +11,16 @@ class MyApp extends StatelessWidget {
       title: 'CalcuGrade',
       theme: ThemeData(
         // Define the default brightness and colors.
+        brightness: Brightness.light,
         primaryColor: Colors.orange[800],
         buttonColor: Colors.orange[800],
+        accentColor: Colors.orangeAccent,
 
         // Define the default font family.
         fontFamily: 'Roboto',
 
         textTheme: TextTheme(
-          headline5: TextStyle(fontWeight: FontWeight.bold),
+          headline5: TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
       home: Home(),

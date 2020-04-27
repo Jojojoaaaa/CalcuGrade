@@ -7,7 +7,7 @@ class ParentText extends StatelessWidget {
   final TextStyle style;
   final List<TextSpan> children;
 
-  static getTextSpan(String tsText, TextStyle tsStyle, List<TextSpan> tsChildren) {
+  static TextSpan getTextSpan(String tsText, TextStyle tsStyle, List<TextSpan> tsChildren) {
     return TextSpan(text: tsText, style: tsStyle, children: tsChildren);
   }
 
