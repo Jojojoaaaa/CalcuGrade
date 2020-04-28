@@ -23,9 +23,7 @@ showAlertDialog(BuildContext context, BuildContext sContext) {
   Widget fnameTextField = Padding(
       padding: EdgeInsets.only(bottom: 20),
       child: TextField(
-        style: TextStyle(
-          fontSize: 14,
-        ),
+        style: TextStyle(fontSize: 14),
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'First Name',
@@ -61,17 +59,16 @@ showAlertDialog(BuildContext context, BuildContext sContext) {
     context: context,
     builder: (BuildContext context) {
       return LayoutBuilder(
-    builder: (BuildContext context, BoxConstraints viewportConstraints) {
-      return SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: viewportConstraints.maxHeight,
-          ),
-          child: alert
-        ),
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: viewportConstraints.maxHeight,
+                ),
+                child: alert),
+          );
+        },
       );
-    },
-  );
     },
   );
 }

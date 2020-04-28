@@ -23,12 +23,9 @@ class Home extends StatelessWidget {
               text: headline,
               context: context,
               children: [
-                ParentText.getTextSpan(
-                    subheader,
-                    context,
+                ParentText.getTextSpan(subheader, context,
                     [ParentText.getTextSpan(highlight, context, [])]),
-                ParentText.getTextSpan(
-                    subheader2, context, [])
+                ParentText.getTextSpan(subheader2, context, [])
               ],
             ),
             Image(image: AssetImage('assets/home/calcugrade.png')),

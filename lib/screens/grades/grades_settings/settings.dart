@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:calcugrade/screens/grades/local_widgets/instruction.dart';
+import 'package:calcugrade/screens/grades/local_widgets/header.dart';
+import 'package:calcugrade/screens/grades/local_widgets/line_entry.dart';
+import 'package:calcugrade/screens/grades/local_widgets/action_buttons.dart';
+import 'package:calcugrade/widgets/layouts/scrollview.dart';
+import 'package:calcugrade/widgets/snack_bar/custom_snack_bar.dart';
+
 class Settings extends StatefulWidget {
   Settings({Key key}) : super(key: key);
 
@@ -14,104 +21,62 @@ class _SettingsState extends State<Settings> {
       midtermsPercent,
       finalsPercent,
       projectPercent;
+  bool isEditting = false;
 
-  showInstruction(BuildContext ctx) {
-    return Padding(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
-        child: Text(
-            "Modify the value of the total scores for each of the criteria and it’s percentage value.",
-            style: Theme.of(ctx).textTheme.caption));
+  buildBodyLayout(BuildContext context, BuildContext sContext, BoxConstraints viewportConstraints) {
+    List<Widget> children = [
+      showInstruction(context),
+      showHeader(context),
+      generateLine(context, "Attendance", 80, 80, isEditting),
+      generateLine(context, "Quizzes", 80, 80, isEditting),
+      generateLine(context, "Midterms", 80, 80, isEditting),
+      generateLine(context, "Finals", 80, 80, isEditting),
+      generateLine(context, "Project", 80, 80, isEditting),
+      isEditting ? showActionButtons(saveChanges, exitEditMode, sContext) : Container()
+    ];
+
+    return showScrollView(children, viewportConstraints);
   }
 
-  showHeader(BuildContext ctx) {
-    return Padding(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text("Criteria", style: Theme.of(ctx).textTheme.caption),
-          Row(children: [
-            Padding(
-              padding: EdgeInsets.only(left: 5, right: 5),
-              child: SizedBox(
-                  width: 50,
-                  child: Text("Total", style: Theme.of(ctx).textTheme.caption)),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 5, right: 5),
-              child: SizedBox(
-                  width: 100,
-                  child: Text("Percentage",
-                      style: Theme.of(ctx).textTheme.caption)),
-            )
-          ])
-        ]));
+  void toggleEditMode() {
+    setState(() {
+      isEditting = true;
+    });
   }
 
-  generateLine(BuildContext ctx, String lable, int total, int percentage) {
-    return Padding(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(lable, style: Theme.of(ctx).textTheme.bodyText2),
-          Row(children: [
-            Padding(
-              padding: EdgeInsets.only(left: 25, right: 25),
-              child: SizedBox(
-                  width: 50,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    controller: TextEditingController(text: total.toString()),
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                    ),
-                  )),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25, right: 20),
-              child: SizedBox(
-                  width: 50,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    controller:
-                        TextEditingController(text: percentage.toString()),
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                    ),
-                  )),
-            ),
-          ])
-        ]));
+  exitEditMode() {
+    setState(() {
+      isEditting = false;
+    });
+  }
+
+  saveChanges(context) {
+    exitEditMode();
+    // api call to save
+    displaySnackBar("Grade settings have been modified.", context);
+  }
+
+  editButton() {
+    return IconButton(
+        icon: Icon(Icons.edit),
+        iconSize: 35,
+        onPressed: () {
+          toggleEditMode();
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Grade Settings"),
+          actions: [editButton()],
         ),
-  body: LayoutBuilder(
-    builder: (BuildContext context, BoxConstraints viewportConstraints) {
-      return SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: viewportConstraints.maxHeight,
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                showInstruction(context),
-                showHeader(context),
-                generateLine(context, "Attendance", 80, 80),
-                generateLine(context, "Quizzes", 80, 80),
-                generateLine(context, "Midterms", 80, 80),
-                generateLine(context, "Finals", 80, 80),
-                generateLine(context, "Project", 80, 80)
-              ],
-            )),
-        ),
-      );
-    },
-  ));
+        body: LayoutBuilder(
+            builder: (BuildContext sContext, BoxConstraints viewportConstraints) {
+              return buildBodyLayout(context, sContext, viewportConstraints);
+            }
+        )
+    );
   }
 }

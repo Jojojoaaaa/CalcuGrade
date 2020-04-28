@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:calcugrade/screens/home/home.dart';
-
+import 'package:calcugrade/theme/style.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -9,21 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CalcuGrade',
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.light,
-        primaryColor: Colors.orange[800],
-        buttonColor: Colors.orange[800],
-        accentColor: Colors.orangeAccent,
-
-        // Define the default font family.
-        fontFamily: 'Roboto',
-
-        textTheme: TextTheme(
-          headline5: TextStyle(fontWeight: FontWeight.w900),
-          caption: TextStyle(fontSize: 14)
-        ),
-      ),
+      theme: appTheme(),
       home: Home(),
     );
   }
