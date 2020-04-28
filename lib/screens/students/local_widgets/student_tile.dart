@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:calcugrade/screens/students/student_profile/profile.dart';
 
 class StudentTile extends StatelessWidget {
   StudentTile(
@@ -19,7 +20,10 @@ class StudentTile extends StatelessWidget {
       title: Text(name, style: Theme.of(context).textTheme.bodyText1),
       trailing: Text(finalGrade.toStringAsFixed(2), style: Theme.of(context).textTheme.bodyText1),
       onTap: () {
-        // go to student profile
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Profile()),
+        );
       },
     ));
   }
