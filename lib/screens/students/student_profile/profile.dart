@@ -12,15 +12,17 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   buildBodyLayout(BuildContext context, BoxConstraints viewportConstraints) {
     List<Widget> children = [
       getBanner(context),
+      getLabel(context),
       getSummary(context),
       Divider(
         color: Colors.grey,
       ),
       getDescription(context),
+      getEditGradesButton(),
+      getHeader(context),
       getGradeBreakdown(context, "Attendance"),
       getGradeBreakdown(context, "Quizzes"),
       getGradeBreakdown(context, "Midterms"),
@@ -31,11 +33,28 @@ class _ProfileState extends State<Profile> {
     return showScrollView(children, viewportConstraints);
   }
 
+  getOptions() {
+    return PopupMenuButton<String>(
+      onSelected: (String choice) {
+        if (choice == "remove") {
+          // trigger remove
+        } else {
+          //trigger
+        }
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+        PopupMenuItem<String>(value: "edit", child: Text("Edit", style: Theme.of(context).textTheme.caption)),
+        PopupMenuItem<String>(value: "remove", child: Text("Remove", style: Theme.of(context).textTheme.caption)),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Student Profile"),
+        actions: [getOptions()],
       ),
       body: LayoutBuilder(
         builder: (BuildContext sContext, BoxConstraints viewportConstraints) {

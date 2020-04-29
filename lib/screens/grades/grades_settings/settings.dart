@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:calcugrade/screens/grades/local_widgets/instruction.dart';
 import 'package:calcugrade/screens/grades/local_widgets/header.dart';
 import 'package:calcugrade/screens/grades/local_widgets/line_entry.dart';
-import 'package:calcugrade/screens/grades/local_widgets/action_buttons.dart';
+import 'package:calcugrade/widgets/buttons/action_buttons.dart';
 import 'package:calcugrade/widgets/layouts/scrollview.dart';
 import 'package:calcugrade/widgets/snack_bar/custom_snack_bar.dart';
 
